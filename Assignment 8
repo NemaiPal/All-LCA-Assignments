@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+/* Swap the values stored at the two addresses */
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main(void)
+{
+    int motor1, motor2;      /* speeds: M1 = left, M2 = right */
+    int orig1, orig2;        /* copies kept for verification  */
+    int *p1, *p2;
+
+    printf("Enter speed of Motor 1 (Left): ");
+    scanf("%d", &motor1);
+    printf("Enter speed of Motor 2 (Right): ");
+    scanf("%d", &motor2);
+
+    orig1 = motor1;
+    orig2 = motor2;
+
+    p1 = &motor1;
+    p2 = &motor2;
+
+    printf("\n--- Before Swap ---\n");
+    printf("Motor 1: speed = %d, address = %p\n", motor1, (void *)p1);
+    printf("Motor 2: speed = %d, address = %p\n", motor2, (void *)p2);
+
+    swap(p1, p2);
+
+    printf("\n--- After Swap ---\n");
+    printf("Motor 1: speed = %d, address = %p\n", motor1, (void *)p1);
+    printf("Motor 2: speed = %d, address = %p\n", motor2, (void *)p2);
+
+    printf("\n--- Verification ---\n");
+    if (motor1 == orig2 && motor2 == orig1)
+        printf("Swap successful: speeds exchanged, addresses unchanged.\n");
+    else
+        printf("Swap failed.\n");
+
+    return 0;
+}
